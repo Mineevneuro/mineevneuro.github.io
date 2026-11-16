@@ -109,6 +109,11 @@ li + li { margin-top: 0.4em; }
 .hero h1 { margin-bottom: 0.15em; }
 .hero .sub { font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--faint); margin-bottom: 1.6rem; }
 .hero .intro { color: var(--muted); max-width: 34rem; margin-bottom: 1.6rem; }
+.hero p.intro { margin-bottom: 0.9rem; }
+.hero ul.roles { list-style: none; padding: 0; margin: 0 0 1.8rem; }
+.hero ul.roles li { position: relative; padding-left: 1.1rem; margin-bottom: 0.45rem; }
+.hero ul.roles li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--accent); }
+.hero ul.roles strong { color: var(--text); }
 .hero .photo { align-self: end; margin: 0 -1.25rem; }
 .hero .photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 @media (min-width: 52rem) {
