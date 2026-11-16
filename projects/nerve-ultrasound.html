@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nerve ultrasound segmentation with landmarks · Vladimir Mineev</title>
+  <meta name="description" content="Next project: re-annotate brachial plexus ultrasound with clinical landmarks and measure how far automatic dataset masks are from expert annotation.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23d9461c%22/%3E%3Ctext x=%2232%22 y=%2243%22 font-family=%22Helvetica,Arial,sans-serif%22 font-size=%2230%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22%3EVM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="case">
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="../index.html">mineev<span>.</span>neuro</a>
+    <a href="../index.html#projects">All projects</a>
+  </div>
+</nav>
+
+<main id="main">
+<header class="case-head">
+  <div class="wrap">
+    <p><span class="tag">Python · next project</span></p>
+    <h1>Nerve ultrasound segmentation with landmarks</h1>
+    <p class="tagline">A public brachial plexus ultrasound dataset labels the plexus automatically. How far are those labels from what a pain physician would mark, and what do they leave out?</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>Regional-US: 227 de-identified brachial plexus videos from 3 ultrasound machines (Tyagi et al., IROS 2024; non-commercial licence, not redistributed)</dd>
+      <dt>Scope</dt><dd>20 supraclavicular videos, about 10 frames each; one metric; two weeks</dd>
+      <dt>Tools</dt><dd>Python, napari for annotation</dd>
+      <dt>Status</dt><dd>Annotation protocol written; annotation next</dd>
+    </dl>
+  </div>
+</header>
+
+<section aria-labelledby="ctx-h">
+  <div class="wrap">
+    <h2 id="ctx-h">Clinical context</h2>
+    <p>I did about 2,000 ultrasound-guided blocks. At the supraclavicular level, the plexus is never found on its own. You first find the subclavian artery, the first rib and the pleura, and they also tell you where the needle must not go. The dataset's plexus masks come from a tracker and an active contour. They mark the plexus only and carry no landmarks.</p>
+  </div>
+</section>
+
+<section aria-labelledby="approach-h">
+  <div class="wrap">
+    <h2 id="approach-h">Plan</h2>
+    <ol class="pipeline" aria-label="Pipeline">
+      <li>Split by patient</li>
+      <li>Annotate 4 classes</li>
+      <li>Dice vs dataset masks</li>
+      <li>README + post</li>
+    </ol>
+    <ul>
+      <li><strong>Split first:</strong> train and test are separated by patient before any annotation, so no patient appears on both sides.</li>
+      <li><strong>Annotation:</strong> plexus, subclavian artery, first rib and pleura, following published consensus definitions (Delphi studies, Bowness 2022 and Ashken 2022).</li>
+      <li><strong>Comparison:</strong> Dice between the dataset's plexus masks and mine on the same frames, and how it varies across machines and gain settings.</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="results-h">
+  <div class="wrap">
+    <h2 id="results-h">Why this dataset</h2>
+    <p>I checked the open median nerve datasets first, frame by frame. They were not usable: one is cropped around the nerve and augmented before the split, so test frames leak into training. Regional-US is the base instead. Median nerve data has been requested from two groups and will follow if it arrives.</p>
+  </div>
+</section>
+
+<section aria-labelledby="lim-h">
+  <div class="wrap">
+    <h2 id="lim-h">Limits</h2>
+    <ul>
+      <li>One annotator.</li>
+      <li>Supraclavicular level only.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="../index.html">← Back to Vladimir Mineev</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Automated lumbar pedicle screw planning · Vladimir Mineev</title>
+  <meta name="description" content="Next project: plan lumbar pedicle screw trajectories automatically from CT and compare them with a surgeon's manual plan.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23d9461c%22/%3E%3Ctext x=%2232%22 y=%2243%22 font-family=%22Helvetica,Arial,sans-serif%22 font-size=%2230%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22%3EVM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="case">
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="../index.html">mineev<span>.</span>neuro</a>
+    <a href="../index.html#projects">All projects</a>
+  </div>
+</nav>
+
+<main id="main">
+<header class="case-head">
+  <div class="wrap">
+    <p><span class="tag">Python · next project</span></p>
+    <h1>Automated lumbar pedicle screw planning</h1>
+    <p class="tagline">Can a simple geometric planner put lumbar pedicle screw trajectories where a surgeon would? Lumbar CT in, one trajectory per pedicle out, checked against my own manual plans.</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>VerSe'19, open spine CT with vertebra masks</dd>
+      <dt>Scope</dt><dd>Lumbar spine, L1–L5</dd>
+      <dt>Planned stack</dt><dd>Python, NumPy, SciPy (distance transform); TotalSegmentator for masks on new scans</dd>
+      <dt>Status</dt><dd>Planned as my CS50x final project</dd>
+    </dl>
+    <p class="note small">Research and educational project. Not a medical device and not for clinical use.</p>
+  </div>
+</header>
+
+<section aria-labelledby="ctx-h">
+  <div class="wrap">
+    <h2 id="ctx-h">Clinical context</h2>
+    <p>In my guided cases the screws were planned by hand: segment the vertebra, find the narrowest part of the pedicle, set the entry point and angle, check the length. Trajectories and guide design in Blender took about <a href="patient-specific-3d-printing.html">40 minutes per case</a>. The trajectory part is geometry a program can do.</p>
+  </div>
+</section>
+
+<section aria-labelledby="approach-h">
+  <div class="wrap">
+    <h2 id="approach-h">Plan</h2>
+    <ol class="pipeline" aria-label="Pipeline">
+      <li>Lumbar CT</li>
+      <li>Vertebra masks</li>
+      <li>Pedicle isthmus</li>
+      <li>Trajectory</li>
+      <li>trajectory-plan.json</li>
+    </ol>
+    <ul>
+      <li><strong>Masks:</strong> VerSe ground-truth masks first, then TotalSegmentator to see how mask errors carry into the plan.</li>
+      <li><strong>Pedicle:</strong> find the isthmus, the narrowest cross-section of the pedicle, with a distance transform.</li>
+      <li><strong>Trajectory:</strong> a line through the isthmus centre into the vertebral body, with screw diameter and length chosen from the pedicle width and the body depth.</li>
+      <li><strong>Output:</strong> a JSON plan, the same format as the trajectory-planner module of <a href="spine-unit-lab.html">spine-unit-lab</a>.</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="results-h">
+  <div class="wrap">
+    <h2 id="results-h">How it will be judged</h2>
+    <p>Against manual plans I make on the same vertebrae: entry-point distance in millimetres and angle in degrees. These are the same metrics as in the <a href="screw-accuracy.html">guided screw accuracy analysis</a>. The planned trajectory must also stay inside the pedicle.</p>
+  </div>
+</section>
+
+<section aria-labelledby="lim-h">
+  <div class="wrap">
+    <h2 id="lim-h">Limits</h2>
+    <ul>
+      <li>One reference planner, me. A second surgeon's plans would show how much surgeons disagree with each other.</li>
+      <li>Lumbar spine only in the first version; thoracic pedicles are narrower and harder.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="../index.html">← Back to Vladimir Mineev</a></p>
+  </div>
+</footer>
+</body>
+</html>

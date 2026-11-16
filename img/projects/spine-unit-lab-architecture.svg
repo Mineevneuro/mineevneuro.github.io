@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-labelledby="t d">
+  <title id="t">spine-unit-lab architecture</title>
+  <desc id="d">EHR (FHIR) feeds a patient summary; PACS (DICOM) feeds segmentation, which feeds measurements and the trajectory planner; a guideline knowledge base, the summary, measurements and plan feed an LLM agent; the agent produces a draft that the surgeon reviews and signs in the workstation.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#6b767c"/>
+    </marker>
+    <style>
+      .b{fill:#ffffff;stroke:#b9c3c7;stroke-width:2}
+      .p{fill:#fdeee8;stroke:#d9461c;stroke-width:2.5}
+      .h{fill:#ffffff;stroke:#d9461c;stroke-width:2.5}
+      .n{font:600 19px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#1b1f22}
+      .s{font:15px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#5a6369}
+      .st{font:600 13px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#d9461c}
+      .l{stroke:#6b767c;stroke-width:2;fill:none;marker-end:url(#a)}
+    </style>
+  </defs>
+  <rect width="800" height="600" fill="#f4f5f7"/>
+
+  <!-- row 1 -->
+  <rect class="b" x="40" y="36" width="220" height="68" rx="10"/>
+  <text class="n" x="56" y="64">EHR</text><text class="s" x="56" y="88">FHIR · synthetic patients</text>
+  <rect class="b" x="290" y="36" width="220" height="68" rx="10"/>
+  <text class="n" x="306" y="64">PACS</text><text class="s" x="306" y="88">Orthanc · DICOM</text>
+  <rect class="b" x="540" y="36" width="220" height="68" rx="10"/>
+  <text class="n" x="556" y="64">Knowledge base</text><text class="s" x="556" y="88">RAG over spine guidelines</text>
+
+  <!-- row 2 -->
+  <rect class="b" x="40" y="166" width="220" height="68" rx="10"/>
+  <text class="n" x="56" y="194">Patient summary</text><text class="s" x="56" y="218">history, labs</text>
+  <rect class="b" x="290" y="166" width="220" height="68" rx="10"/>
+  <text class="n" x="306" y="194">Segmentation</text><text class="s" x="306" y="218">nnU-Net / TotalSegmentator</text>
+  <rect class="p" x="540" y="166" width="220" height="68" rx="10"/>
+  <text class="n" x="556" y="194">Trajectory planner</text><text class="st" x="556" y="218">NEXT</text>
+
+  <!-- row 3 -->
+  <rect class="b" x="290" y="300" width="220" height="68" rx="10"/>
+  <text class="n" x="306" y="328">Agent (LLM)</text><text class="s" x="306" y="352">combines inputs → draft</text>
+
+  <!-- row 4 -->
+  <rect class="h" x="230" y="430" width="340" height="68" rx="10"/>
+  <text class="n" x="246" y="458">Surgeon workstation</text><text class="s" x="246" y="482">review, edit, sign; AI never writes alone</text>
+
+  <!-- arrows -->
+  <path class="l" d="M150 104 V164"/>
+  <path class="l" d="M400 104 V164"/>
+  <path class="l" d="M510 200 H538"/>
+  <path class="l" d="M150 234 L288 318"/>
+  <path class="l" d="M400 234 V298"/>
+  <path class="l" d="M650 234 L512 318"/>
+  <path class="l" d="M760 70 H784 V352 H512"/>
+  <path class="l" d="M400 368 V428"/>
+
+  <text class="s" x="400" y="548" text-anchor="middle">Modules talk only through JSON contracts · synthetic and open data only</text>
+</svg>

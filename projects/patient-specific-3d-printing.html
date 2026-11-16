@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patient-specific 3D-printed surgical guides · Vladimir Mineev</title>
+  <meta name="description" content="10 clinical cases: CT/MRI segmentation, guide design in Blender, 3D-printed drill, cutting and vertebroplasty guides and anatomical models used intraoperatively.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23d9461c%22/%3E%3Ctext x=%2232%22 y=%2243%22 font-family=%22Helvetica,Arial,sans-serif%22 font-size=%2230%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22%3EVM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="case">
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="../index.html">mineev<span>.</span>neuro</a>
+    <a href="../index.html#projects">All projects</a>
+  </div>
+</nav>
+
+<main id="main">
+<header class="case-head">
+  <div class="wrap">
+    <p><span class="tag">Clinical · done</span></p>
+    <h1>Patient-specific 3D-printed surgical guides</h1>
+    <p class="tagline">10 clinical cases at Almazov National Medical Research Centre: drill guides, cutting guides, a vertebroplasty guide and anatomical models designed from the patient's CT/MRI and used in the operating room.</p>
+    <dl class="facts">
+      <dt>Role</dt><dd>Built the pipeline; segmentation, design, printing, intraoperative use</dd>
+      <dt>Setup</dt><dd>Picaso Designer X Pro (FDM) in the neurosurgical department, PLA, low-temperature plasma sterilisation (Sterrad)</dd>
+      <dt>Software</dt><dd>Materialise Mimics (most used), 3D Slicer, Inobitec, ITK-SNAP; Blender for design</dd>
+      <dt>Period</dt><dd>2021–2025; <a href="#early-h">~10 paediatric cranial cases in residency</a>, 2020–2021</dd>
+    </dl>
+  </div>
+</header>
+
+<section aria-labelledby="ctx-h">
+  <div class="wrap">
+    <h2 id="ctx-h">Clinical context</h2>
+    <p>Spinal navigation was not routinely available in the department, so patient-specific guides were the default way to bring a CT-based plan into the operating room. Three recurring problems:</p>
+    <ul>
+      <li><strong>Pedicle and translaminar screws in altered anatomy</strong> (metastatic vertebrae, cervicothoracic junction, C2 lamina), where freehand angulation error risks breach or cut-out.</li>
+      <li><strong>En-bloc resection of sacral chordoma</strong>, where recurrence is linked to margin status and the osteotomy has to follow a planned margin.</li>
+      <li><strong>Titanium cranioplasty</strong>, where contouring a plate to the defect during surgery is slow and imprecise.</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="approach-h">
+  <div class="wrap">
+    <h2 id="approach-h">Approach</h2>
+    <ol class="pipeline" aria-label="Pipeline">
+      <li>CT / MRI</li>
+      <li>Segmentation (3D Slicer, Inobitec, Mimics, ITK-SNAP)</li>
+      <li>Trajectory &amp; guide design (Blender)</li>
+      <li>STL</li>
+      <li>FDM print, PLA</li>
+      <li>Sterrad sterilisation</li>
+      <li>Operating room</li>
+    </ol>
+    <ul>
+      <li><strong>Drill guides:</strong> screw trajectories modelled as cylinders through the vertebra; the guide's contact surface is taken from the segmented vertebra at each level.</li>
+      <li><strong>Cutting guides:</strong> sacrum and tumour segmented; the resection plane is set along the planned margin and turned into a slotted matrix for an ultrasonic bone scalpel. Version 2 (Case 3) changed the matrix geometry for better fit and stability.</li>
+      <li><strong>Vertebroplasty guide:</strong> two channels set the needle trajectories into the vertebral body for open vertebroplasty.</li>
+      <li><strong>Anatomical models:</strong> bone with vessels for approach planning (L4), skull with defect for pre-bending titanium mesh.</li>
+    </ul>
+    <h3>Time for one drill-guide case</h3>
+    <div class="table-scroll">
+      <table>
+        <tbody>
+          <tr><td>Bone mask segmentation</td><td>~5&nbsp;min</td></tr>
+          <tr><td>Trajectory sleeves and guide in Blender</td><td>~40&nbsp;min</td></tr>
+          <tr><td>Design checks</td><td>~5&nbsp;min</td></tr>
+          <tr><td>Print planning (G-code)</td><td>~10&nbsp;min</td></tr>
+          <tr><td>Printing: model + guides</td><td>~10&nbsp;h</td></tr>
+          <tr><td>Support removal, guide check, trajectory check on the model</td><td>~30&nbsp;min</td></tr>
+          <tr><td>Sterilisation</td><td>Sterrad</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>About 1.5&nbsp;hours of hands-on work per case, plus about 10&nbsp;hours of unattended printing.</p>
+    <figure>
+      <img src="../img/projects/3d-c2-translaminar-plan.jpg" width="1176" height="1200" loading="lazy"
+           alt="Blender render of the upper cervical spine with cylinders showing planned crossed translaminar screw trajectories through C2">
+      <figcaption>Case 7: planned bilateral C2 translaminar trajectories, checked in Blender before printing the guides.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="results-h">
+  <div class="wrap">
+    <h2 id="results-h">Results</h2>
+    <p>Guides were printed, sterilised and used intraoperatively; models were used for planning and implant fitting.</p>
+    <div class="table-scroll">
+      <table>
+        <caption class="muted small" style="text-align:left;caption-side:bottom;padding-top:.5rem">Case series, single centre. Imaging: CT unless noted.</caption>
+        <thead>
+          <tr><th scope="col">#</th><th scope="col">Pathology</th><th scope="col">Output</th><th scope="col">Use / outcome</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Primary tumour, L4 (MRI)</td><td>Lumbar spine model with aorta and segmental vessels</td><td>Planning of combined posterior + retroperitoneal approach</td></tr>
+          <tr><td>2</td><td>Sacral chordoma</td><td>Cutting guide v1 + model</td><td>Ultrasonic-scalpel resection; <strong>R0</strong></td></tr>
+          <tr><td>3</td><td>Sacral chordoma (MRI)</td><td>Cutting guide v2 + model</td><td>Resection; <strong>R0</strong>; better fit than v1</td></tr>
+          <tr><td>4</td><td>Metastasis Th1–Th2</td><td>5 drill guides, C7–Th5</td><td>Pedicle screw fixation at all 5 guided levels</td></tr>
+          <tr><td>5</td><td>Post-resection skull defect</td><td>Skull defect model</td><td>Titanium plate pre-contoured, fit checked</td></tr>
+          <tr><td>6</td><td>Metastases Th3, Th5</td><td>2 drill guides</td><td>Decompression; pedicle screws at Th3, Th5 through the guides</td></tr>
+          <tr><td>7</td><td>Odontoid fracture, C1–C2 instability</td><td>C1–C2 model + translaminar drill guides</td><td>Bilateral C2 translaminar screws</td></tr>
+          <tr><td>8</td><td>Post-resection skull defects (2 patients)</td><td>Skull models</td><td>Titanium mesh pre-bent and fit-checked</td></tr>
+          <tr><td>9</td><td>Thoracolumbar spine, open vertebroplasty</td><td>Vertebroplasty guide + model</td><td>Vertebroplasty needles placed through the guide</td></tr>
+          <tr><td>10</td><td>C1–C2 (2021)</td><td>C1–C2 model</td><td>Preoperative planning</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Operating time was not recorded systematically. The team's impression was that screw fixation took about 20&nbsp;minutes less on average with the guides.</p>
+
+    <h3>Case 6, plan to result</h3>
+    <p>Metastases at Th3 and Th5. Spine segmented from preoperative CT, screw trajectories set as cylinders in Blender, one drill guide per level fitted to the posterior elements. Decompression, then pedicle screws through the guides.</p>
+    <div class="figs three">
+      <figure>
+        <img src="../img/projects/3d-case6-plan-posterior.jpg" width="1000" height="1000" loading="lazy"
+             alt="Blender render, posterior view: upper thoracic vertebrae with two orange drill guides and blue cylinders marking the planned screw trajectories">
+        <figcaption>Plan, posterior view: guides for Th3 and Th5, trajectories in blue.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-case6-plan-threequarter.jpg" width="1000" height="1000" loading="lazy"
+             alt="Blender render, three-quarter view: the guides seen half from the side, trajectories running horizontally into the pedicles">
+        <figcaption>Same plan, three-quarter view along the trajectories.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-case6-postop-ct.jpg" width="900" height="900" loading="lazy"
+             alt="Postoperative CT, posterior maximum intensity projection: four pedicle screws and two rods in the upper thoracic spine">
+        <figcaption>Postoperative CT, 2022 (posterior projection): four screws and two rods.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Case 6: screw accuracy</h3>
+    <p>On postoperative CT the screw tips sit on average 2.3&nbsp;mm from the planned trajectories, and no screw moved more than 1&nbsp;mm toward the spinal canal. One of the four, Th3 right, is tilted about 12° in the craniocaudal direction. Details: <a href="screw-accuracy.html">guided screw accuracy on postoperative CT</a>.</p>
+
+    <div class="figs">
+      <figure>
+        <img src="../img/projects/3d-sacrum-guide-render.jpg" width="1200" height="1200" loading="lazy"
+             alt="Blender render of the sacrum with an orange patient-specific cutting guide seated on its posterior surface">
+        <figcaption>Case 3: cutting guide v2 on the sacral model (Blender).</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-sacrum-printed.jpg" width="1200" height="1200" loading="lazy"
+             alt="3D-printed sacrum model, top-down view">
+        <figcaption>Case 3: printed sacrum model.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-l4-vascular-model.jpg" width="1200" height="1200" loading="lazy"
+             alt="3D-printed lumbar spine with the tumour in green and the aorta and segmental vessels in red">
+        <figcaption>Case 1: lumbar spine with tumour and vessels for retroperitoneal approach planning.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-cranioplasty-mesh.jpg" width="900" height="1200" loading="lazy"
+             alt="Perforated titanium mesh being fitted onto a 3D-printed skull model">
+        <figcaption>Case 8: titanium mesh pre-bent on the printed skull model.</figcaption>
+      </figure>
+    </div>
+    <figure class="narrow">
+      <img src="../img/projects/3d-vertebroplasty-guide.jpg" width="900" height="1200" loading="lazy"
+           alt="On a sterile drape: a vertebroplasty needle with a green handle next to a printed guide with two needle channels">
+      <figcaption>Case 9, 2022: printed guide for open vertebroplasty next to the vertebroplasty needle.</figcaption>
+    </figure>
+    <figure>
+      <img src="../img/projects/3d-printed-models.jpg" width="960" height="1200" loading="lazy"
+           alt="Several 3D-printed spine, pelvis and skull models on a table">
+      <figcaption>A selection of printed models from the series.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="early-h">
+  <div class="wrap">
+    <h2 id="early-h">Earlier work: paediatric cranial cases in residency, 2020–2021</h2>
+    <p>About 10 paediatric cases in residency: skull models for craniosynostosis surgery (cranial vault distraction, fronto-orbital reconstruction) and cranioplasty, printed on a Picaso Designer X Pro (FDM). Segmentation was first done by a member of the department staff, later by me, in 3D Slicer, Inobitec, ITK-SNAP and Mimics; Mimics turned out the most convenient. The operation was rehearsed on the model: osteotomies marked and cut, fragments fixed, distractors and implants fitted.</p>
+    <div class="figs portrait">
+      <figure>
+        <img src="../img/projects/3d-craniosynostosis-rehearsal.jpg" width="600" height="1200" loading="lazy"
+             alt="Hand holding a printed child's skull model cut into labelled fragments that are fixed together with small plates">
+        <figcaption>Craniosynostosis, 2021: the child's skull printed from CT, osteotomies cut and fragments refixed with plates on the model before surgery.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-craniosynostosis-model-or.jpg" width="600" height="1200" loading="lazy"
+             alt="Printed child's skull model resting on a horseshoe headrest at the end of an operating table">
+        <figcaption>The same model on the headrest in the operating room.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-cranial-distractor-rehearsal.jpg" width="898" height="1200" loading="lazy"
+             alt="Gloved hands holding a printed skull model with a marked osteotomy line and a metal distraction device attached">
+        <figcaption>Cranial vault distraction, 2021: osteotomy line marked on the printed skull and the distractor fitted to the model before surgery.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-cranioplasty-mesh-2020.jpg" width="600" height="1200" loading="lazy"
+             alt="Titanium mesh shaped over the defect of a printed skull model, held on a desk">
+        <figcaption>Cranioplasty, 2020: titanium mesh contoured on the printed skull model.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="qa-h">
+  <div class="wrap">
+    <h2 id="qa-h">Verification and the regulatory view</h2>
+    <p>A printed guide is a patient-specific medical device made inside the hospital. We had no formal quality system for it, but several of the checks a manufacturer would require came up in practice.</p>
+    <figure>
+      <img src="../img/projects/3d-picaso-printer.jpg" width="900" height="1200" loading="lazy" style="max-width:22rem"
+           alt="Picaso Designer X Pro 3D printer on a cabinet in the department">
+      <figcaption>The department's printer, Picaso Designer X Pro.</figcaption>
+    </figure>
+    <h3>What we actually did</h3>
+    <ul>
+      <li><strong>Sterilisation vs geometry.</strong> We tested it empirically: standard heat sterilisation softened the parts enough to deform them and shift the drilling trajectory. Low-temperature plasma sterilisation (Sterrad) kept the shape.</li>
+      <li><strong>Material choice.</strong> PLA (polylactic acid) was chosen because the literature describes it as biocompatible; it is also one of the materials that tolerates low-temperature sterilisation.</li>
+      <li><strong>Pre-use verification.</strong> Every guide was printed together with a bone model of the same patient. Before surgery the guide was inspected on its own (print defects, warping) and then seated on the model to check fit and trajectory.</li>
+      <li><strong>Design iteration from use.</strong> The first sacral cutting guide was awkward to handle in the wound; the second version changed the geometry (Cases 2 → 3).</li>
+      <li><strong>Clinical study.</strong> The cervical and thoracic drill guides were used within a hospital clinical study of 3D-printed guides for transpedicular fixation; the study documents were prepared by a senior resident.</li>
+      <li><strong>Records.</strong> Blender projects and STL files were kept per case (G-code for some), so a guide can be traced back to its design.</li>
+    </ul>
+    <h3>What was missing</h3>
+    <ul>
+      <li>No microbiological testing (cultures) after sterilisation.</li>
+      <li>No systematic measurement of guide accuracy at the time. Measured later for one case (<a href="screw-accuracy.html">Case 6</a>).</li>
+      <li>No written risk analysis or design-verification protocol: the checks above were done, but not documented as a procedure.</li>
+    </ul>
+    <h3>How I would set it up today</h3>
+    <p>Under EU MDR, a guide made for one named patient is a <em>custom-made device</em> (Article 52(8), Annex XIII); in the US, the FDA's work on point-of-care 3D printing treats a hospital that prints devices as taking on manufacturer responsibilities. In practice that means:</p>
+    <ul>
+      <li>a risk file per ISO 14971, with hazards such as guide mis-seating, deformation after sterilisation, segmentation error, wrong patient or wrong level;</li>
+      <li>design controls per ISO 13485: inputs (imaging protocol, target trajectory), outputs (STL, print settings), verification on the model, validation of the sterilisation process for each material;</li>
+      <li>if the planning step is automated, the planning software itself falls under IEC 62304.</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="lim-h">
+  <div class="wrap">
+    <h2 id="lim-h">Limitations / next steps</h2>
+    <ul>
+      <li>Case series from one centre, no control group; outcomes are per case, not a comparison with navigation or freehand.</li>
+      <li>Also tried, not developed further: patient-specific navigation guides for endoscopic transnasal chiasmal-sellar surgery (presented at the Nationwide Neurosurgical Forum, 2023). See below.</li>
+      <li>Screw accuracy against the plan is measured for one case only (Case 6, 4 screws).</li>
+      <li>Segmentation and guide design were manual: about 1.5&nbsp;hours of hands-on work per case, plus about 10&nbsp;hours of printing.</li>
+      <li>Next: automate the planning step, see <a href="pedicle-screw-planning.html">automated pedicle screw planning</a>.</li>
+    </ul>
+    <div class="figs">
+      <figure>
+        <img src="../img/projects/transnasal-guide-or.jpg" width="900" height="1200" loading="lazy"
+             alt="Patient's head seen from above, face not visible; a printed guide is taped over the face and a straight needle passes through it">
+        <figcaption>Transnasal guide, 2022: printed guide fixed to the face, needle passed through it.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/transnasal-guide-ct.jpg" width="1000" height="1000" loading="lazy"
+             alt="Sagittal CT slab: the printed guide in front of the face and a needle entering the nasal cavity">
+        <figcaption>CT with the guide and needle in place (sagittal slab, rendered from pixel data only).</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="code-h">
+  <div class="wrap">
+    <h2 id="code-h">Files</h2>
+    <p>Two of the printed guides as STL (guide geometry only; its contact surface follows the patient's bone, with no images or identifiers). GitHub shows STL files in an interactive 3D viewer:</p>
+    <ul>
+      <li><a href="https://github.com/Mineevneuro/mineevneuro.github.io/blob/main/models/c2-translaminar-guide.stl">C2 translaminar drill guide</a> (Case 7) · <a href="../models/c2-translaminar-guide.stl" download>download, 0.3&nbsp;MB</a></li>
+      <li><a href="https://github.com/Mineevneuro/mineevneuro.github.io/blob/main/models/th3-pedicle-guide.stl">Th3 pedicle drill guide</a> (Case 6) · <a href="../models/th3-pedicle-guide.stl" download>download, 0.3&nbsp;MB</a></li>
+    </ul>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="../index.html">← Back to Vladimir Mineev</a></p>
+  </div>
+</footer>
+</body>
+</html>

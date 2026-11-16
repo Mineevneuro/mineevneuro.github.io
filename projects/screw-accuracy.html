@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guided screw accuracy on postoperative CT · Vladimir Mineev</title>
+  <meta name="description" content="How far four thoracic pedicle screws placed through 3D-printed guides ended up from the plan, measured on postoperative CT.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23d9461c%22/%3E%3Ctext x=%2232%22 y=%2243%22 font-family=%22Helvetica,Arial,sans-serif%22 font-size=%2230%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22%3EVM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="case">
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="../index.html">mineev<span>.</span>neuro</a>
+    <a href="../index.html#projects">All projects</a>
+  </div>
+</nav>
+
+<main id="main">
+<header class="case-head">
+  <div class="wrap">
+    <p><span class="tag">Python · done</span></p>
+    <h1>Guided screw accuracy on postoperative CT</h1>
+    <p class="tagline">How far did screws placed through 3D-printed guides end up from the plan? Measured retrospectively for one patient, four thoracic pedicle screws.</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>Blender plan and guide STLs (2022), postoperative CT (1&nbsp;mm slices)</dd>
+      <dt>Stack</dt><dd>Python: pydicom, NumPy, SciPy (KD-tree ICP); Blender for plan export</dd>
+      <dt>Result</dt><dd>Screw tips 2.3&nbsp;mm from plan on average; none more than 1&nbsp;mm toward the canal</dd>
+    </dl>
+  </div>
+</header>
+
+<section aria-labelledby="ctx-h">
+  <div class="wrap">
+    <h2 id="ctx-h">Clinical context</h2>
+    <p>Patient with metastases at Th3 and Th5 (<a href="patient-specific-3d-printing.html">Case 6 of the 3D printing series</a>). One drill guide per level, decompression, four pedicle screws placed through the guides. At the time nobody measured how close the screws came to the plan. The plan and the postoperative CT were both still on disk, so the question could be answered afterwards.</p>
+    <div class="figs">
+      <figure>
+        <img src="../img/projects/3d-case6-plan-threequarter.jpg" width="1000" height="1000" loading="lazy"
+             alt="Blender render, three-quarter view: two orange drill guides on the thoracic spine, blue planned trajectories running horizontally into the pedicles">
+        <figcaption>The plan: guides for Th3 and Th5, trajectories in blue.</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/projects/3d-case6-postop-ct.jpg" width="900" height="900" loading="lazy"
+             alt="Postoperative CT, posterior maximum intensity projection: four pedicle screws and two rods">
+        <figcaption>The result: postoperative CT, four screws and two rods.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="approach-h">
+  <div class="wrap">
+    <h2 id="approach-h">How it was measured</h2>
+    <p>The bone model from the Blender plan was matched to the bone on the postoperative CT, which puts the planned trajectories into the postoperative scan. Each screw axis was taken from the metal of the screw shaft. For every screw: distance from the planned line at the entry point and at the tip, and the angle between plan and screw.</p>
+  </div>
+</section>
+
+<section aria-labelledby="results-h">
+  <div class="wrap">
+    <h2 id="results-h">Results</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Screw</th><th scope="col">Entry, mm</th><th scope="col">Tip, mm</th><th scope="col">Angle, °</th></tr></thead>
+        <tbody>
+          <tr><td>Th3 right</td><td>4.7</td><td>3.6</td><td>12.2</td></tr>
+          <tr><td>Th3 left</td><td>2.3</td><td>2.4</td><td>3.2</td></tr>
+          <tr><td>Th5 right</td><td>0.8</td><td>1.8</td><td>3.4</td></tr>
+          <tr><td>Th5 left</td><td>2.6</td><td>1.5</td><td>2.7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>On average the screws entered 2.6&nbsp;mm and ended 2.3&nbsp;mm from the planned trajectory. No screw deviated more than 1&nbsp;mm toward the spinal canal. Three screws were within about 3° of the plan; one, Th3 right, was tilted about 12° in the craniocaudal direction.</p>
+    <figure>
+      <img src="../img/projects/3d-case6-accuracy.jpg" width="1000" height="691" loading="lazy"
+           alt="Four oblique CT slices, one along each screw: a blue planned line and an orange screw axis; in the top-left panel the two lines cross at an angle, in the others they nearly coincide">
+      <figcaption>CT slices along each screw. Blue: plan; orange: actual screw axis. Top: Th3 right, Th3 left. Bottom: Th5 right, Th5 left.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section aria-labelledby="lim-h">
+  <div class="wrap">
+    <h2 id="lim-h">Limitations</h2>
+    <ul>
+      <li>One patient, four screws, measured retrospectively.</li>
+      <li>Any guidance method, navigation or guides, has some error. Here it may come from the guide not sitting perfectly tight on the vertebra or from slight play of the drill in the guide sleeve.</li>
+      <li>The measurement itself carries about 1&nbsp;mm of registration error.</li>
+      <li>Next: the same measurement for the other guided cases if their postoperative CT can be found.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="../index.html">← Back to Vladimir Mineev</a></p>
+  </div>
+</footer>
+</body>
+</html>

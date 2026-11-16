@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>spine-unit-lab · Vladimir Mineev</title>
+  <meta name="description" content="An open test bench that recreates the digital workflow of a spine unit — EHR (FHIR), PACS (DICOM), segmentation, trajectory planning — with AI as an assistant to the surgeon.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23d9461c%22/%3E%3Ctext x=%2232%22 y=%2243%22 font-family=%22Helvetica,Arial,sans-serif%22 font-size=%2230%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22%3EVM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="case">
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="../index.html">mineev<span>.</span>neuro</a>
+    <a href="../index.html#projects">All projects</a>
+  </div>
+</nav>
+
+<main id="main">
+<header class="case-head">
+  <div class="wrap">
+    <p><span class="tag">Health IT · early stage</span></p>
+    <h1>spine-unit-lab</h1>
+    <p class="tagline">An open test bench that recreates the digital workflow of a spine department on an open-source stack, with AI as an assistant to the surgeon, not a decision maker.</p>
+    <dl class="facts">
+      <dt>Stack</dt><dd>FHIR server with synthetic patients (Synthea), Orthanc PACS (DICOM), nnU-Net / TotalSegmentator, RAG, LLM agent</dd>
+      <dt>Status</dt><dd>Architecture and module contracts defined; first module (trajectory planner) next</dd>
+    </dl>
+    <p class="note small">Research and educational project. Not a medical device and not for clinical use. Synthetic or open data only.</p>
+  </div>
+</header>
+
+<section aria-labelledby="ctx-h">
+  <div class="wrap">
+    <h2 id="ctx-h">Clinical context</h2>
+    <p>In a real department the information for one surgical decision is scattered: images in PACS, history and labs in the EHR, guidelines in PDFs, measurements in the surgeon's head. The project asks a practical question: which parts of that work can AI take over reliably, and how do you prove it?</p>
+  </div>
+</section>
+
+<section aria-labelledby="approach-h">
+  <div class="wrap">
+    <h2 id="approach-h">Approach</h2>
+    <p>The bench reproduces one patient journey:</p>
+    <ol>
+      <li>Patient admitted → record created in the EHR (FHIR).</li>
+      <li>MRI / CT ordered → study stored in PACS (DICOM).</li>
+      <li>Images segmented → measurements extracted (canal, discs, pedicles).</li>
+      <li>Agent combines measurements, history and guidelines → <strong>draft</strong> for the surgeon.</li>
+      <li>Surgeon reviews, edits and signs. AI never writes to the chart on its own.</li>
+    </ol>
+    <figure>
+      <img src="../img/projects/spine-unit-lab-architecture.svg?v=2" width="800" height="600" loading="lazy"
+           alt="Architecture diagram: EHR, PACS and a guideline knowledge base feed segmentation, a trajectory planner and an LLM agent, whose draft goes to a surgeon workstation for sign-off">
+      <figcaption>Each module can be built, tested and replaced on its own; they exchange only JSON documents with fixed schemas.</figcaption>
+    </figure>
+    <h3>Design rules</h3>
+    <ul>
+      <li><strong>Contracts first:</strong> JSON schemas are written before the code that produces or consumes them.</li>
+      <li><strong>No real patient data:</strong> synthetic (Synthea) and open datasets only.</li>
+      <li><strong>Human in the loop:</strong> every AI output is a draft with sources and confidence.</li>
+      <li><strong>Security by design:</strong> threat model before features; security and AI-safety tests only against this bench.</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="results-h">
+  <div class="wrap">
+    <h2 id="results-h">Status</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Module</th><th scope="col">What it does</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td><a href="pedicle-screw-planning.html">trajectory-planner</a></td><td>Pedicle screw trajectory from lumbar CT</td><td>next</td></tr>
+          <tr><td>knowledge-base</td><td>RAG over spine guidelines with citations</td><td>planned</td></tr>
+          <tr><td>segmentation</td><td>Spine segmentation → structured measurements</td><td>planned</td></tr>
+          <tr><td>ehr</td><td>FHIR server, synthetic patients, patient summary</td><td>planned</td></tr>
+          <tr><td>pacs</td><td>DICOM storage and retrieval</td><td>planned</td></tr>
+          <tr><td>agent</td><td>Combines everything into a draft for the surgeon</td><td>idea</td></tr>
+          <tr><td>workstation-ui</td><td>Review, edit, sign</td><td>idea</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Planned studies</h3>
+    <ul>
+      <li>How does weight quantization change clinical answers, and does RAG compensate?</li>
+      <li>How much does each RAG component contribute?</li>
+      <li>How much does a clinician correct auto-segmentation, and which metric predicts it?</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="code-h">
+  <div class="wrap">
+    <h2 id="code-h">Code</h2>
+    <p>Repository: not public yet.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="../index.html">← Back to Vladimir Mineev</a></p>
+  </div>
+</footer>
+</body>
+</html>
